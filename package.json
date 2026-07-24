@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "School Distance Finder for Grade 1 Admissions in Sri Lanka",
   "private": true,
-  "homepage": "https://yourusername.github.io/school-finder-sl",
+  "homepage": "https://amaliUG.github.io/school-finder-sl",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
