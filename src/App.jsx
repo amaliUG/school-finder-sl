@@ -328,8 +328,12 @@ export default function SchoolFinderSriLanka() {
 
   const generatePDF = async (type) => {
     try {
-      const { jsPDF } = await import('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+      if (!window.jsPDF) {
+        alert('PDF library is loading. Please wait and try again.');
+        return;
+      }
 
+      const { jsPDF } = window;
       const canvas = mapRef.current;
       const mapImage = canvas.toDataURL('image/png');
 
@@ -427,7 +431,7 @@ export default function SchoolFinderSriLanka() {
       doc.save(type === 'distance' ? `school-distance-report-${new Date().getTime()}.pdf` : `schools-radius-report-${new Date().getTime()}.pdf`);
     } catch (error) {
       console.error('PDF error:', error);
-      alert('Error generating PDF.');
+      alert('Error generating PDF. jsPDF library may not be loaded yet.');
     }
   };
 
