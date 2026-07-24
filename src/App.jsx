@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MapPin, Plus, Download, Loader, ChevronDown } from 'lucide-react';
+import { MapPin, Plus, Download, Loader } from 'lucide-react';
 
 export default function SchoolFinderSriLanka() {
   const [homeLocation, setHomeLocation] = useState(null);
@@ -10,8 +10,6 @@ export default function SchoolFinderSriLanka() {
   const [schoolAddress, setSchoolAddress] = useState('');
   const [showMap, setShowMap] = useState(false);
   const [mapType, setMapType] = useState('distance');
-  const [selectedProvince, setSelectedProvince] = useState('');
-  const [selectedDistrict, setSelectedDistrict] = useState('');
   const mapRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
@@ -96,18 +94,6 @@ export default function SchoolFinderSriLanka() {
     'school': { lat: 7.2906, lng: 80.6337, name: 'Target School', district: 'Kandy' },
   };
 
-  const provinces = {
-    'Western': ['Colombo', 'Gampaha', 'Kalutara'],
-    'Central': ['Kandy', 'Matale', 'Nuwara Eliya'],
-    'Southern': ['Galle', 'Matara', 'Hambantota'],
-    'Northern': ['Jaffna', 'Mullaitivu', 'Vavuniya'],
-    'Eastern': ['Trincomalee', 'Batticaloa', 'Ampara'],
-    'North Western': ['Kurunegala', 'Puttalam'],
-    'Sabaragamuwa': ['Ratnapura', 'Kegalle'],
-    'Uva': ['Badulla', 'Monaragala'],
-    'North Central': ['Anuradhapura', 'Polonnaruwa']
-  };
-
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
     const R = 6371;
     const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -166,10 +152,6 @@ export default function SchoolFinderSriLanka() {
         const distB = calculateDistance(home.lat, home.lng, b.lat, b.lng);
         return distA - distB;
       });
-
-      if (selectedDistrict) {
-        nearby = nearby.filter(s => s.district === selectedDistrict);
-      }
       
       setNearbySchools(nearby);
       setShowMap(true);
